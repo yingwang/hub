@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Hub · Ying</title>
+<style>
+:root {
+  --bg: #f6f7f9; --fg: #1c2024; --muted: #6b7280; --card: #ffffff;
+  --line: #e6e8eb; --accent: #0d9488; --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 14px rgba(0,0,0,.04);
+  --pos: #16a34a; --neg: #dc2626;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1116; --fg: #e6e8eb; --muted: #9aa3ad; --card: #171b21;
+    --line: #262c34; --accent: #2dd4bf; --shadow: none; --pos: #4ade80; --neg: #f87171;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 920px; margin: 0 auto; padding: 40px 20px 64px; }
+header h1 { margin: 0; font-size: 26px; letter-spacing: .3px; }
+header p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+h2 { font-size: 14px; color: var(--muted); font-weight: 600; margin: 30px 0 12px; letter-spacing: .4px; }
+.daily-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 12px; }
+.grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.card {
+  display: block; text-decoration: none; color: inherit; background: var(--card);
+  border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+  transition: transform .12s ease, border-color .12s ease;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.card.daily { padding: 18px 18px 16px; }
+.card.daily .card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.card.daily .title { font-size: 17px; font-weight: 650; }
+.card.daily .date { font-size: 12px; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card.daily .blurb { margin: 6px 0 12px; font-size: 13px; color: var(--muted); }
+.card.daily .latest { margin: 4px 0 0; font-size: 14px; font-weight: 650; line-height: 1.45; }
+.card.daily .latest.sub { margin-top: 6px; font-size: 13px; font-weight: 400; color: var(--muted); }
+.card.daily .latest.muted { font-weight: 400; color: var(--muted); }
+.perf-row { display: flex; align-items: baseline; gap: 8px; margin-top: 6px; }
+.perf-row .s-name { font-size: 14px; font-weight: 600; min-width: 52px; }
+.perf-row .s-ret { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.perf-row .s-meta { font-size: 12px; color: var(--muted); }
+.perf-foot { margin: 10px 0 0; font-size: 12px; color: var(--muted); }
+.pos { color: var(--pos); }
+.neg { color: var(--neg); }
+.card.link { padding: 14px 15px; }
+.card.link .title { font-size: 14px; font-weight: 550; }
+footer { margin-top: 36px; color: var(--muted); font-size: 13px; }
+footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Hub</h1>
+    <p>每天更新的几个站点,以及书与教程的入口</p>
+  </header>
+
+  <h2>每日更新</h2>
+  <div class="daily-grid">
+      <a class="card daily" href="https://yingwang.github.io/paper-reads/">
+        <div class="card-top">
+          <span class="title">每日论文精读</span>
+          <span class="date">2026-05-31</span>
+        </div>
+        <p class="blurb">huggingface daily 榜首论文的中文四段精读</p>
+        <p class="latest">OmniRetrieval</p><p class="latest sub">不把异构知识源压进同一个向量空间，而是用长上下文模型选源、为每个源生成它原生语言的查询、再跨源挑证据，从而在保留各源结构表达力的同时，对外只露出一个自然语言接口。</p>
+      </a>
+      <a class="card daily" href="https://yingwang.github.io/news-reads/">
+        <div class="card-top">
+          <span class="title">每日新闻 brief</span>
+          <span class="date">2026-05-31</span>
+        </div>
+        <p class="blurb">过去 24 小时全球新闻的结构化中文摘要</p>
+        <p class="latest">地缘政治与国际关系 · 经济与市场 · 科技与 AI · 科学与气候</p>
+      </a>
+      <a class="card daily" href="https://yingwang.github.io/trade/">
+        <div class="card-top">
+          <span class="title">量化策略面板</span>
+          <span class="date">2026-05-29</span>
+        </div>
+        <p class="blurb">多因子与 LGBM 两套策略的实盘业绩 (Alpaca)</p>
+        <div class="perf-row"><span class="s-name">多因子</span><span class="s-ret pos">+20.7%</span><span class="s-meta">权益 $120,663</span></div><div class="perf-row"><span class="s-name">LGBM</span><span class="s-ret pos">+30.3%</span><span class="s-meta">权益 $130,270</span></div><p class="perf-foot">Alpaca paper trading 实盘业绩</p>
+      </a>
+  </div>
+
+      <section class="group">
+        <h2>AI / 技术</h2>
+        <div class="grid">
+        <a class="card link" href="https://yingwang.github.io/llm-tutorial/"><span class="title">LLM 训练工程师指南</span></a>
+        <a class="card link" href="https://yingwang.github.io/thinking-in-llm/"><span class="title">Thinking in LLM</span></a>
+        <a class="card link" href="https://yingwang.github.io/image-enhancement-guide/"><span class="title">图像增强:原理到工程</span></a>
+        <a class="card link" href="https://yingwang.github.io/robotics-llm-book/"><span class="title">具身智能的工程判断</span></a>
+        </div>
+      </section>
+      <section class="group">
+        <h2>投资</h2>
+        <div class="grid">
+        <a class="card link" href="https://yingwang.github.io/investing-book/"><span class="title">投资书</span></a>
+        </div>
+      </section>
+      <section class="group">
+        <h2>旅行</h2>
+        <div class="grid">
+        <a class="card link" href="https://yingwang.github.io/china-train-book/"><span class="title">中国高铁游指南</span></a>
+        </div>
+      </section>
+      <section class="group">
+        <h2>文化 / 生活</h2>
+        <div class="grid">
+        <a class="card link" href="https://yingwang.github.io/china-porcelain-book/"><span class="title">瓷:中国第一个工业</span></a>
+        <a class="card link" href="https://yingwang.github.io/photography-book/"><span class="title">摄影技法书</span></a>
+        <a class="card link" href="https://yingwang.github.io/reading-guide/"><span class="title">阅读指南 · 100 本</span></a>
+        <a class="card link" href="https://yingwang.github.io/recipes/"><span class="title">家常菜谱</span></a>
+        </div>
+      </section>
+      <section class="group">
+        <h2>博客 / 其他</h2>
+        <div class="grid">
+        <a class="card link" href="https://yingwang.github.io/blog/"><span class="title">个人博客</span></a>
+        </div>
+      </section>
+
+  <footer>
+    构建于 2026-05-31 13:59 · <a href="https://yingwang.github.io/">个人主页</a> · <a href="https://github.com/yingwang">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>
