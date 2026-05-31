@@ -117,7 +117,11 @@ def latest_paper():
     if summary and summary.startswith(name):
         summary = summary[len(name):].lstrip("：:，, 　")
     lines = [name] + ([summary] if summary else [])
-    return {"date": latest[:10], "lines": lines}
+    links = []
+    m = re.search(r"arxiv\.org/abs/([0-9]{4}\.[0-9]{4,5})", txt or "")
+    if m:
+        links.append(("arXiv ↗", f"https://arxiv.org/abs/{m.group(1)}"))
+    return {"date": latest[:10], "lines": lines, "links": links}
 
 
 def latest_news():
@@ -269,14 +273,28 @@ def render_daily_card(site):
     else:
         body = '<p class="latest muted">最新内容暂不可用</p>'
 
-    return f"""      <a class="card daily" href="{esc(site['url'])}">
-        <div class="card-top">
+    inner = f"""<div class="card-top">
           <span class="title">{esc(site['title'])}</span>
           <span class="date">{date}</span>
         </div>
         <p class="blurb">{esc(site['blurb'])}</p>
-        {body}
-      </a>"""
+        {body}"""
+
+    links = (data or {}).get("links") or []
+    if not links:
+        # Whole card is one link to the site.
+        return f'      <a class="card daily" href="{esc(site["url"])}">\n        {inner}\n      </a>'
+    # Card has secondary links (e.g. arXiv): main area links to the site, plus
+    # separate sibling links below (cannot nest <a> inside <a>).
+    ext = "".join(
+        f'<a class="ext" href="{esc(u)}">{esc(t)}</a>' for t, u in links
+    )
+    return f"""      <div class="card daily">
+        <a class="card-main" href="{esc(site['url'])}">
+        {inner}
+        </a>
+        <div class="card-ext">{ext}</div>
+      </div>"""
 
 
 def render_link_card(name, url):
@@ -344,6 +362,13 @@ h2 {{ font-size: 14px; color: var(--muted); font-weight: 600; margin: 30px 0 12p
 }}
 .card:hover {{ transform: translateY(-2px); border-color: var(--accent); }}
 .card.daily {{ padding: 18px 18px 16px; }}
+.card.daily .card-main {{ display: block; text-decoration: none; color: inherit; }}
+.card.daily .card-ext {{ margin-top: 12px; }}
+.card.daily .ext {{
+  display: inline-block; text-decoration: none; font-size: 12px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px;
+}}
+.card.daily .ext:hover {{ border-color: var(--accent); }}
 .card.daily .card-top {{ display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }}
 .card.daily .title {{ font-size: 17px; font-weight: 650; }}
 .card.daily .date {{ font-size: 12px; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }}

@@ -37,6 +37,13 @@ h2 { font-size: 14px; color: var(--muted); font-weight: 600; margin: 30px 0 12px
 }
 .card:hover { transform: translateY(-2px); border-color: var(--accent); }
 .card.daily { padding: 18px 18px 16px; }
+.card.daily .card-main { display: block; text-decoration: none; color: inherit; }
+.card.daily .card-ext { margin-top: 12px; }
+.card.daily .ext {
+  display: inline-block; text-decoration: none; font-size: 12px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px;
+}
+.card.daily .ext:hover { border-color: var(--accent); }
 .card.daily .card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .card.daily .title { font-size: 17px; font-weight: 650; }
 .card.daily .date { font-size: 12px; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -66,14 +73,17 @@ footer a { color: var(--accent); text-decoration: none; }
 
   <h2>每日更新</h2>
   <div class="daily-grid">
-      <a class="card daily" href="https://yingwang.github.io/paper-reads/">
+      <div class="card daily">
+        <a class="card-main" href="https://yingwang.github.io/paper-reads/">
         <div class="card-top">
           <span class="title">每日论文精读</span>
           <span class="date">2026-05-31</span>
         </div>
         <p class="blurb">huggingface daily 榜首论文的中文四段精读</p>
         <p class="latest">OmniRetrieval</p><p class="latest sub">不把异构知识源压进同一个向量空间，而是用长上下文模型选源、为每个源生成它原生语言的查询、再跨源挑证据，从而在保留各源结构表达力的同时，对外只露出一个自然语言接口。</p>
-      </a>
+        </a>
+        <div class="card-ext"><a class="ext" href="https://arxiv.org/abs/2605.29250">arXiv ↗</a></div>
+      </div>
       <a class="card daily" href="https://yingwang.github.io/news-reads/">
         <div class="card-top">
           <span class="title">每日新闻 brief</span>
@@ -130,7 +140,7 @@ footer a { color: var(--accent); text-decoration: none; }
       </section>
 
   <footer>
-    构建于 2026-05-31 13:59 · <a href="https://yingwang.github.io/">个人主页</a> · <a href="https://github.com/yingwang">GitHub</a>
+    构建于 2026-05-31 15:39 · <a href="https://yingwang.github.io/">个人主页</a> · <a href="https://github.com/yingwang">GitHub</a>
   </footer>
 </div>
 </body>
