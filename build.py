@@ -220,6 +220,7 @@ GROUPS = [
     ]),
     ("博客 / 其他", [
         ("个人博客", "https://yingwang.github.io/blog/"),
+        ("Hugging Face", "https://huggingface.co/xingqiwang"),
     ]),
 ]
 
