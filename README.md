@@ -2,7 +2,7 @@
 
 一个单页 dashboard,把几个每天更新的 GitHub Pages 站点和一批书/教程汇到一起,方便一眼看到今天有没有新内容。
 
-线上地址:https://yingwang.github.io/hub/
+线上地址:https://hub.yingwang.dev/(GitHub Pages 源站 https://yingwang.github.io/hub/ 会重定向到这里)
 
 ## 它做什么
 

@@ -24,6 +24,9 @@ OWNER = "yingwang"
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "docs", "index.html")
+CNAME_OUT = os.path.join(HERE, "docs", "CNAME")
+# 自定义域名。写进 docs/CNAME，随 Pages artifact 一起上传，GitHub 据此绑定域名。
+CUSTOM_DOMAIN = "hub.yingwang.dev"
 
 
 # ----------------------------------------------------------------------------
@@ -321,6 +324,9 @@ def build():
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(page)
     print(f"Wrote {OUT} ({len(page)} bytes)")
+    with open(CNAME_OUT, "w", encoding="utf-8") as f:
+        f.write(CUSTOM_DOMAIN + "\n")
+    print(f"Wrote {CNAME_OUT} ({CUSTOM_DOMAIN})")
 
 
 TEMPLATE = """<!DOCTYPE html>
